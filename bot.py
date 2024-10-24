@@ -5,11 +5,11 @@ from telebot import types
 import tempfile
 
 # Set the path for FFmpeg
-ffmpeg_path = "C:/ffmpeg/bin/ffmpeg.exe"
+ffmpeg_path = "/usr/bin/ffmpeg"
 AudioSegment.ffmpeg = ffmpeg_path
 
 # Initialize the bot
-token = '6730043869:AAHacpzHhLSHiW6y49WTUIQ5qhH25cAeRX8'
+token = 'TOKEN'
 bot = telebot.TeleBot(token)
 
 
@@ -17,8 +17,8 @@ bot = telebot.TeleBot(token)
 def start_message(message):
     bot.send_message(
         message.chat.id,
-        'Отправь мне песню в формате mp3 или wav\n'
-        'иначе будешь вечность ждать свою песню мухахаха! =)\n\n'
+        'Отправь или перешли мне песню, немного подожди и выбери нужную версию\n'
+
         'P.S Сообщайте мне в личку, если найдете баги \n ===> @MorozovOne'
     )
 
@@ -66,7 +66,7 @@ def choose(message, temp_file_path, original_filename):
             octaves = 0.6
             sound = AudioSegment.from_file(temp_file_path)
             new_sample_rate = int(sound.frame_rate * (
-                0.85 if new_suffix == "slowed" else 0.65 if new_suffix == "superslowed" else 1.15 if new_suffix == "nightcore" else 1.3))
+                0.9 if new_suffix == "slowed" else 0.7 if new_suffix == "superslowed" else 1.1 if new_suffix == "nightcore" else 1.2))
             pitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
             pitch_sound = pitch_sound.set_frame_rate(44100)
 
